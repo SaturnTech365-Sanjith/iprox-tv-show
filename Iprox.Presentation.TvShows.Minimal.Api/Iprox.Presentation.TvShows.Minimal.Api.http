@@ -1,0 +1,6 @@
+@Iprox.Presentation.TvShows.Minimal.Api_HostAddress = http://localhost:5272
+
+GET {{Iprox.Presentation.TvShows.Minimal.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

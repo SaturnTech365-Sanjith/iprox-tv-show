@@ -1,0 +1,51 @@
+name: CI/CD Pipeline
+
+# Trigger the pipeline on push or pull request
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Define the job to build, test, and deploy the app
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0'
+
+    - name: Install dependencies
+      run: |
+        dotnet restore ./src/Application/Application.csproj
+
+    - name: Build the solution
+      run: |
+        dotnet build ./src/YourSolution.sln --configuration Release
+
+    - name: Run unit tests
+      run: |
+        dotnet test ./test/Iprox.TvShows.UnitTests/Iprox.TvShows.UnitTests.csproj --configuration Release
+
+    - name: Publish project (for deployment)
+      run: |
+        dotnet publish ./src/Presentation/Iprox.Presentation.TvShows.Api/Iprox.Presentation.TvShows.Api.csproj --configuration Release --output ./publish
+
+    - name: Deploy to your environment (e.g., Azure, AWS)
+      run: |
+        # Example deploy script for Azure
+        # az webapp deploy --resource-group <resource_group_name> --name <app_name> --src-path ./publish
+        echo "Deploying to your environment..."
+
+    - name: Clean up
+      run: |
+        # Any cleanup tasks after deployment
+        echo "Cleaning up..."

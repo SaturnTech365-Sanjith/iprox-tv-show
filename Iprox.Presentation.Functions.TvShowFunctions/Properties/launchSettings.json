@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Iprox.Presentation.Functions.TvShowFunctions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7005",
+      "launchBrowser": false
+    }
+  }
+}
