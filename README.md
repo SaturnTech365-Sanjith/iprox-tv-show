@@ -35,17 +35,17 @@ Modify the `appsettings.json` file with the appropriate database connection stri
 ```
 
 #### For Azure Function:
-Modify the `local.settings.json` file with the correct storage connection string:
+Create/Modify the `local.settings.json` file with the correct storage connection string:
 ```json
 {
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=iproxtvshowstorage;AccountKey=YOUR_ACCOUNT_KEY;EndpointSuffix=core.windows.net",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
-  },
-  "ConnectionStrings": {
-    "ApplicationDbContext": "Server=.;Database=IproxDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;"
-  }
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=iproxtvshowstorage;AccountKey=7Dd0TIzb+YDQyqIZorIxRyUCvLzHre2U7DK9rZt0ioM+CPu5+cyQ1+3br75XRJGEKTDcIXVC1LAw+AStLNLTVw==;EndpointSuffix=core.windows.net",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
+    },
+    "ConnectionStrings": {
+        "ApplicationDbContext": "Server=.;Database=IproxDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;"
+    }
 }
 ```
 
