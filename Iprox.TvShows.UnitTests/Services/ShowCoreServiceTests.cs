@@ -46,6 +46,17 @@ public class ShowCoreServiceTests
             TvMazeId = 12345
         };
 
+        var mockGenreRepository = new Mock<IGenreRepository>();
+
+        mockGenreRepository
+            .Setup(repo => repo.GetByIdAsync((int)GenreType.Drama))
+            .ReturnsAsync(new Genre { Id = (int)GenreType.Drama, Name = GenreType.Drama.ToString() });
+
+        mockGenreRepository
+            .Setup(repo => repo.GetByIdAsync((int)GenreType.ScienceFiction))
+            .ReturnsAsync(new Genre { Id = (int)GenreType.ScienceFiction, Name = GenreType.ScienceFiction.ToString() });
+
+        _mockUnitOfWork.Setup(uow => uow.GenreRepository).Returns(mockGenreRepository.Object);
 
         _mockUnitOfWork.Setup(uow => uow.TvShowRepository.AddAsync(tvShow))
             .ThrowsAsync(new Exception("Database error"));
@@ -63,3 +74,4 @@ public class ShowCoreServiceTests
         );
     }
 }
+

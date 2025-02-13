@@ -36,7 +36,8 @@ namespace Iprox.Domain.Core
         {
             try
             {
-                TvShow? tvShow = await _unitOfWork.TvShowRepository.GetByIdAsync(id);
+                var filterExpression = (Expression<Func<TvShow, object>>)(t => t.Genres);
+                TvShow? tvShow = _unitOfWork.TvShowRepository.Include(filterExpression).Where(x => x.Id == id).FirstOrDefault();
                 return tvShow;
             }
             catch (Exception ex)
@@ -64,10 +65,6 @@ namespace Iprox.Domain.Core
                         }
                     }
                     tvShow.Genres = refGenres.DistinctBy(g => g.Id).ToList();
-                }
-                else
-                {
-                    tvShow.Genres = null;
                 }
 
                 await _unitOfWork.TvShowRepository.AddAsync(tvShow);
